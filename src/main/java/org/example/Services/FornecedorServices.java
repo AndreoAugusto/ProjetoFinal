@@ -34,7 +34,7 @@ public class FornecedorServices {
 
     public Fornecedor update(Long id, FornecedorDTO objDto) {
         try {
-            Fornecedor entity = findById(id);
+            Fornecedor entity = repository.findById(id);
 
             entity.setRazaoSocial(objDto.getRazaoSocial());
             entity.setFantasia(objDto.getFantasia());
@@ -45,7 +45,7 @@ public class FornecedorServices {
             contato.setNumero(objDto.getNumero());
             contato.setEmail(objDto.getEmail());
 
-            return FornecedorRepositories.save(entity);
+            return repository.save(entity);
 
         } catch (Exception e)  {
             throw new RuntimeException("Tentativa Inutil de atualizar.");
