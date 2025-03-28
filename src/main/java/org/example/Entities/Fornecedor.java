@@ -1,9 +1,12 @@
 package org.example.Entities;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.mysql.cj.exceptions.StreamingNotifiable;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Fornecedor implements Serializable {
@@ -12,6 +15,8 @@ public class Fornecedor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_FORNECEDOR")
     private Long id;
+    @OneToMany(mappedBy = "conFornecedor", cascade = CascadeType.ALL)
+    private List<Contato> contatos = new ArrayList<>();
 
     @Column(length = 100, name = "RAZAOSOCIAL", nullable = false)
     private String razaoSocial;
@@ -34,6 +39,7 @@ public class Fornecedor implements Serializable {
         this.fantasia = fantasia;
         this.cnpj = cnpj;
         this.status = status;
+
     }
 
     public Long getId() {
@@ -74,5 +80,13 @@ public class Fornecedor implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<Contato> getContatos() {
+        return contatos;
+    }
+
+    public void setContatos(List<Contato> contatos) {
+        this.contatos = contatos;
     }
 }
